@@ -1,0 +1,14 @@
+{
+  "name": "docusign-integration",
+  "version": "1.0.0",
+  "description": "A project to integrate with DocuSign API using JWT",
+  "main": "GetToken.js", 
+  "type": "module",
+  "scripts": {
+    "start": "node GetToken.js"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "node-fetch": "^3.3.2"
+  }
+}
