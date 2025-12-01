@@ -80,10 +80,10 @@ function companyContactSearch(search, companyid,xml)
 						"netsuite_contact_id" : xml.escape({  xmlText :   searchResult[i].getValue({name: "internalid", join: "contact"})       }),
 						"person_name" : xml.escape({  xmlText :   searchResult[i].getValue({name: "entityid", join: "contact"})       }),			
 						"email" : xml.escape({  xmlText :   searchResult[i].getValue({name: "email", join: "contact"})       }),			
-						"phone" : phone,			
+						"phone" : phone.replace(/^\+65/, ""),			
 						"designation" : designation,
 						"is_primary" : isPrimary,
-						"mobile" :mobile_number
+						"mobile" :mobile_number.replace(/^\+65/, "")
 					}
 					companyContactSearchResult.push(rec);
 				}

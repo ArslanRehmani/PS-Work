@@ -111,11 +111,17 @@ define(['N/log', 'N/search', 'N/record'], function (log, search, record) {
         try {
             var customrecord_psg_subownershipSearchObj = search.create({
                 type: "customrecord_psg_subownership",
+                // filters:
+                //     [
+                //         ["isinactive", "is", "F"],
+                //         "AND",
+                //         ["custrecord_psg_subown_startdate", "onorbefore", "today"]
+                //     ],
                 filters:
                     [
-                        ["isinactive", "is", "F"],
+                        [["custrecord_psg_subown_enddate", "isempty", ""], "OR", ["custrecord_psg_subown_enddate", "notbefore", "startoflastmonth"]],
                         "AND",
-                        ["custrecord_psg_subown_startdate", "onorbefore", "today"]
+                        ["custrecord_psg_subown_startdate", "onorbefore", "startoflastmonth"]
                     ],
                 columns:
                     [
@@ -297,6 +303,11 @@ define(['N/log', 'N/search', 'N/record'], function (log, search, record) {
                 name: 'subsidiary',
                 operator: search.Operator.ANYOF,
                 values: [sub]
+            }));
+            transactionSearchObj.filters.push(search.createFilter({
+                name: 'postingperiod',
+                operator: search.Operator.IS,
+                values: "LP"
             }));
             transactionSearchObj.run().each(function (result) {
                 // netIncome += parseFloat(result.getValue({ name: "amount", summary: "SUM" })) || 0;
