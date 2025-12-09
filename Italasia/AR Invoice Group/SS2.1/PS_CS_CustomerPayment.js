@@ -84,7 +84,8 @@ define(['N/search', 'N/record', 'N/ui/message'], /**
             const billingAmount = detail.billingAmount;
             const documentType = detail.documentType;
 
-            const sublistId = documentType === 1 ? 'apply' : 'credit';
+            // const sublistId = documentType === 1 ? 'apply' : 'credit';
+            const sublistId = 'apply';
             const lineIndex = findSublistLineWithValue(currentRecord, sublistId, 'doc', transactionId);
             console.log('lineIndex', lineIndex);
             if (lineIndex !== -1) {
